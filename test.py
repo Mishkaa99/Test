@@ -42,7 +42,7 @@ try:
 finally:
     # говорим WebDriver ждать все элементы в течение 5 секунд
     # browser.implicitly_wait(15)
-    time.sleep(15)
+    time.sleep(13)
     browser.quit()
 
 
