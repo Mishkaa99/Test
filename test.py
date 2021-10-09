@@ -1,3 +1,203 @@
+# # Чтобы указать количество перезапусков для каждого из упавших тестов,
+# # нужно добавить в командную строку параметр: --reruns n, где n — это количество перезапусков.
+# # --tb=line, чтобы сократить лог с результатами теста.
+# # Теперь без browser()!!! Так как он храниться в файле conftest.py, запуск автоматический при помощи Pytest
+# link = "http://selenium1py.pythonanywhere.com/"
+
+# def test_guest_should_see_login_link_pass(browser):
+#     browser.get(link)
+#     browser.find_element_by_css_selector("#login_link")
+
+# def test_guest_should_see_login_link_fail(browser):
+#     browser.get(link)
+#     browser.find_element_by_css_selector("#magic_link")
+
+
+
+# from selenium import webdriver
+# import pytest
+# import math
+# import time
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.common.by import By
+
+# @pytest.fixture(scope="function")
+# def browser():
+#     print("\nstart browser for test..")
+#     browser = webdriver.Chrome()
+#     yield browser
+#     print("\nquit browser..")
+#     browser.quit()
+
+# @pytest.mark.parametrize('namber', ["236895", "236896", "236897", "236898", "236899", "236903", "236904", "236905"])
+# def test_guest_should_see_login_link(browser, namber):
+#     link = f"https://stepik.org/lesson/{namber}/step/1"
+#     browser.get(link)
+#     browser.implicitly_wait(5)
+#     browser.find_element_by_tag_name("textarea").send_keys(str(math.log(int(time.time()))))   
+#     time.sleep(0.3)
+#     browser.find_element_by_class_name("submit-submission").click()   
+#     # находим элемент, содержащий текст
+#     welcome_text_elt = browser.find_element_by_tag_name("pre")
+#     # записываем в переменную welcome_text текст из элемента welcome_text_elt
+#     welcome_text = welcome_text_elt.text
+#     # с помощью assert проверяем, что ожидаемый текст совпадает с текстом на странице сайта   
+#     assert("Correct!" == welcome_text), print("Послание:"+ welcome_text)
+#     time.sleep(10)
+    
+
+
+
+# import pytest
+# from selenium import webdriver
+
+# # @pytest.mark.parametrize() позволяет запустить один и тот же тест с разными входными параметрами. 
+# @pytest.fixture(scope="function")
+# def browser():
+#     print("\nstart browser for test..")
+#     browser = webdriver.Chrome()
+#     yield browser
+#     print("\nquit browser..")
+#     browser.quit()
+
+# @pytest.mark.parametrize('language', ["ru", "en-gb"])
+# def test_guest_should_see_login_link(browser, language):
+#     link = f"http://selenium1py.pythonanywhere.com/{language}/"
+#     browser.get(link)
+#     browser.find_element_by_css_selector("#login_link")
+
+
+
+
+
+
+# import pytest
+# from selenium import webdriver
+
+# link = "http://selenium1py.pythonanywhere.com/"
+
+# # .xfail - метка для падающего теста
+# # Когда баг починят, тест будет отмечен как XPASS
+# @pytest.fixture(scope="function")
+# def browser():
+#     print("\nstart browser for test..")
+#     browser = webdriver.Chrome()
+#     yield browser
+#     print("\nquit browser..")
+#     browser.quit()
+
+
+# class TestMainPage1():
+
+#     def test_guest_should_see_login_link(self, browser):
+#         browser.get(link)
+#         browser.find_element_by_css_selector("#login_link")
+
+#     def test_guest_should_see_basket_link_on_the_main_page(self, browser):
+#         browser.get(link)
+#         browser.find_element_by_css_selector(".basket-mini .btn-group > a")
+#     # Без коментов
+#     # @pytest.mark.xfail
+#     # С коментом запуск(pytest -rx -v test.py)
+#     @pytest.mark.xfail(reason="fixing this bug right now")
+#     def test_guest_should_see_search_button_on_the_main_page(self, browser):
+#         browser.get(link)
+#         # С ошибкой!
+#         browser.find_element_by_css_selector("button.favorite")
+#         # Без ошибки!
+#         # browser.find_element_by_css_selector("input.btn.btn-default")
+        
+
+
+# import pytest
+# from selenium import webdriver
+
+# link = "http://selenium1py.pythonanywhere.com/"
+# # .skip - метка для пропуск теста
+# @pytest.fixture(scope="function")
+# def browser():
+#     print("\nstart browser for test..")
+#     browser = webdriver.Chrome()
+#     yield browser
+#     print("\nquit browser..")
+#     browser.quit()
+
+
+# class TestMainPage1():
+
+#     @pytest.mark.skip
+#     def test_guest_should_see_login_link(self, browser):
+#         browser.get(link)
+#         browser.find_element_by_css_selector("#login_link")
+
+#     def test_guest_should_see_basket_link_on_the_main_page(self, browser):
+#         browser.get(link)
+#         browser.find_element_by_css_selector(".basket-mini .btn-group > a")
+
+
+
+# import pytest
+# from selenium import webdriver
+
+# link = "http://selenium1py.pythonanywhere.com/"
+# # Запуск pytest -s -v -m "smoke and win10" test.py
+# # -s(Печать) -v(Подробный отчет) -m(Обращение к Маркировке)
+
+# @pytest.fixture(scope="function")
+# def browser():
+#     print("\nstart browser for test..")
+#     browser = webdriver.Chrome()
+#     yield browser
+#     print("\nquit browser..")
+#     browser.quit()
+
+
+# class TestMainPage1:
+
+#     @pytest.mark.smoke
+#     def test_guest_should_see_login_link(self, browser):
+#         browser.get(link)
+#         browser.find_element_by_css_selector("#login_link")
+
+#     @pytest.mark.smoke
+#     @pytest.mark.win10
+#     def test_guest_should_see_basket_link_on_the_main_page(self, browser):
+#         browser.get(link)
+#         browser.find_element_by_css_selector(".basket-mini .btn-group > a")
+
+
+
+# import pytest
+# from selenium import webdriver
+
+# link = "http://selenium1py.pythonanywhere.com/"
+
+# # Критичные тесты (smoke), которые нужно запускать на каждый коммит разработчиков,
+# # а остальные тесты обозначить как регрессионные (regression) и запускать их только перед релизом.
+# @pytest.fixture(scope="function")
+# def browser():
+#     print("\nstart browser for test..")
+#     browser = webdriver.Chrome()
+#     yield browser
+#     print("\nquit browser..")
+#     browser.quit()
+
+
+# class TestMainPage1():
+
+#     @pytest.mark.smoke
+#     def test_guest_should_see_login_link(self, browser):
+#         browser.get(link)
+#         browser.find_element_by_css_selector("#login_link")
+
+#     @pytest.mark.regression
+#     def test_guest_should_see_basket_link_on_the_main_page(self, browser):
+#         browser.get(link)
+#         browser.find_element_by_css_selector(".basket-mini .btn-group > a")
+
+
+
 # import pytest
 # from selenium import webdriver
 
